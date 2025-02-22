@@ -170,21 +170,21 @@ end)
 
 local function createESP()
     local box = Drawing.new("Square")
-    box.Color = Color3.fromRGB(255, 255, 255)
+    box.Color = Color3.fromRGB(255,252,252)
     box.Thickness = 1
     box.Filled = false
     box.Transparency = 1
     box.Visible = false
 
     local nameText = Drawing.new("Text")
-    nameText.Color = Color3.fromRGB(0, 255, 255)
+    nameText.Color = Color3.fromRGB(255,252,252)
     nameText.Size = 16
     nameText.Center = true
     nameText.Outline = true
     nameText.Visible = false
 
     local distanceText = Drawing.new("Text")
-    distanceText.Color = Color3.fromRGB(255, 255, 255)
+    distanceText.Color = Color3.fromRGB(255,252,252)
     distanceText.Size = 16
     distanceText.Center = true
     distanceText.Outline = true
