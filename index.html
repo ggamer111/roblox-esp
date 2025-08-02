@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Execution Logs</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>Script Execution Tracker</h1>
+    <ul id="log-list">Loading...</ul>
+  </div>
+
+  <script>
+    async function loadLogs() {
+      try {
+        const res = await fetch('/.netlify/functions/report');
+        const data = await res.json();
+        const logList = document.getElementById("log-list");
+
+        if (data.length === 0) {
+          logList.innerHTML = "<li>No script runs recorded yet.</li>";
+        } else {
+          logList.innerHTML = data.map(log => `
+            <li class="log-entry">
+              <strong>UUID:</strong> ${log.uuid}<br>
+              <strong>Message:</strong> ${log.message}<br>
+              <strong>Time:</strong> ${log.timestamp}
+            </li>
+          `).join("");
+        }
+      } catch (err) {
+        document.getElementById("log-list").innerHTML = "<li>Failed to load logs.</li>";
+      }
+    }
+
+    loadLogs();
+    setInterval(loadLogs, 5000); // refresh every 5s
+  </script>
+</body>
+</html>
